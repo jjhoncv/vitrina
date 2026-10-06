@@ -28,3 +28,9 @@ it("lista cada producto con foto, nombre y precio", async () => {
   expect(items[0].textContent).toContain("S/ 25.00");
   expect(items[1].textContent).toContain("Libreta A5");
 });
+
+it("muestra el precio en negrita", async () => {
+  render(await Page());
+  const precio = screen.getAllByTestId("producto")[0].querySelector("strong");
+  expect(precio?.textContent).toBe("S/ 25.00");
+});

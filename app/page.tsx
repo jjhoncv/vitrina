@@ -14,7 +14,9 @@ export default async function Page() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={p.imagen} alt={p.nombre} width={160} height={160} />
             <h2>{p.nombre}</h2>
-            <p>{p.precio}</p>
+            <p>
+              <strong>{p.precio}</strong>
+            </p>
           </li>
         ))}
       </ul>
