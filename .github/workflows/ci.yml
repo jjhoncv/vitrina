@@ -1,0 +1,18 @@
+# Llama al workflow del Guardián (v0.6.0). Para subir de versión, cambia el @vX.Y.Z (Dependabot lo propone).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    uses: jjhoncv/guardian/.github/workflows/guardian-ci.yml@v0.6.0

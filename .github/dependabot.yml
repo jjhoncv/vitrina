@@ -1,0 +1,35 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: saturday
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      dependencias:
+        patterns: ["*"]
+        update-types: [minor, patch]
+    ignore:
+      # Los saltos mayores (TypeScript 7, ESLint 10, @types/node de otra versión de Node...) rompen
+      # la base: se actualizan como tarea consciente, con su issue y sus pruebas. Los parches de
+      # seguridad llegan igual (Dependabot security updates).
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # También propone subir la versión del Guardián en .github/workflows (uses: jjhoncv/guardian/...@vX.Y.Z).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: saturday
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      acciones:
+        patterns: ["*"]

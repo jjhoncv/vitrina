@@ -1,0 +1,15 @@
+# Llama al workflow del Guardián (v0.6.0). Para subir de versión, cambia el @vX.Y.Z (Dependabot lo propone).
+name: Chequeo del PR
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  chequeo:
+    uses: jjhoncv/guardian/.github/workflows/guardian-chequeo-pr.yml@v0.6.0
