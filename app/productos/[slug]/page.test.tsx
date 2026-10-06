@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeAll, expect, it } from "vitest";
-import Page from "./page";
+import Page, { generateMetadata } from "./page";
 import NoEncontrado from "./not-found";
 
 afterEach(cleanup);
@@ -27,4 +27,15 @@ it("con un slug inexistente dispara notFound", async () => {
 it("la página de no encontrado dice «Producto no encontrado»", () => {
   render(<NoEncontrado />);
   expect(screen.getByText("Producto no encontrado")).toBeTruthy();
+});
+
+// Fase 1 — Título para buscadores: «<nombre> | Vitrina» y descripción.
+it("genera título y descripción para SEO", async () => {
+  const meta = await generateMetadata({ params: Promise.resolve({ slug: "taza-de-ceramica" }) });
+  expect(meta.title).toBe("Taza de cerámica | Vitrina");
+  expect(meta.description).toBe("Taza artesanal de 350 ml.");
+});
+
+it("sin producto, no genera metadatos propios", async () => {
+  expect(await generateMetadata({ params: Promise.resolve({ slug: "no-existe" }) })).toEqual({});
 });
