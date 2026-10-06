@@ -4,9 +4,9 @@
 [![Deploy](https://github.com/jjhoncv/vitrina/actions/workflows/deploy.yml/badge.svg)](https://github.com/jjhoncv/vitrina/actions/workflows/deploy.yml)
 [![Release](https://github.com/jjhoncv/vitrina/actions/workflows/release.yml/badge.svg)](https://github.com/jjhoncv/vitrina/actions/workflows/release.yml)
 
-<Qué es, en una frase.>
+Un catálogo web de productos simples que se administra desde una hoja de Google Sheets.
 
-- **Fase actual:** — (corre `/guardian`)
+- **Fase actual:** Fase 1 — Catálogo público
 - **Staging:** https://staging--vitrina-jjhoncv.netlify.app
 - **Producción:** https://vitrina-jjhoncv.netlify.app
 - **Alcance:** [`PROYECTO.md`](PROYECTO.md) · **Decisiones:** [`docs/decisiones/`](docs/decisiones/README.md) · **Tablero:** pestaña *Projects* del repo

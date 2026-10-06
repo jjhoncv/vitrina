@@ -1,11 +1,11 @@
 # CLAUDE.md — Vitrina
 
-Este repo es **Vitrina**: <qué es, en una frase>.
+Este repo es **Vitrina**: un catálogo web de productos simples que se administra desde una hoja de Google Sheets.
 Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-skeleton` v0.6.0): el pipeline, los deploys, los releases y los tickets los corren los workflows del Guardián. El alcance, las fases y los criterios de aceptación están en @PROYECTO.md. Léelo antes de hacer cualquier cosa.
 
 ## Tu rol
-- Eres el **desarrollador**. <Dueño> es el **dueño y revisor**: aprueba todo.
-- Trabajas **solo en la fase actual**. Hoy: **Fase <N> — <nombre>**.
+- Eres el **desarrollador**. Jhonnatan es el **dueño y revisor**: aprueba todo.
+- Trabajas **solo en la fase actual**. Hoy: **Fase 1 — Catálogo público**.
 - Si algo no está en PROYECTO.md, **no lo hagas**: propónlo para el Parking lot y sigue.
 
 ## Cómo trabajas
@@ -15,8 +15,15 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 4. Un solo cambio lógico por PR; idealmente menos de 300 líneas.
 5. Pruebas primero (TDD); cada tarea apunta a un escenario BDD de PROYECTO.md.
 6. Máximo 2 PRs tuyos esperando revisión; no tomes otra tarea hasta que se aprueben.
-7. Nunca hagas merge a `main` ni despliegues a producción. Eso lo aprueba <Dueño>.
+7. Nunca hagas merge a `main` ni despliegues a producción. Eso lo aprueba Jhonnatan.
 8. Toda decisión técnica relevante va como ADR corta en `docs/decisiones/`.
+
+## Cuando trabajas en la nube (GitHub Actions)
+- Te activa un `@claude` del dueño en un ticket, o el Guardián al fusionarse un PR (siguiente ticket de la fase).
+- Rama `feat/<n>-<slug>` desde `main`; pruebas primero; corre `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` y `npm run e2e` antes de abrir el PR.
+- Abre el PR con `gh pr create`: título `feat(#<n>): …` (Conventional Commits) y en el cuerpo `Closes #<n>`, el escenario que pone en verde y cómo probarlo.
+- Si el ticket necesita algo del dueño (cuentas, credenciales, decisiones) que no está, **no lo inventes**: coméntalo en el ticket y termina sin PR.
+- No puedes aprobar ni fusionar: eso lo hace el dueño.
 
 ## Stack (heredado de la plantilla)
 - Next.js 16 + TypeScript, Node 24 (`.nvmrc`), npm
@@ -30,13 +37,13 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 - Si necesitas una credencial o una cuenta, **pídela** y explica para qué; no la inventes ni la busques en el disco.
 - Permisos mínimos en tokens y cuentas de servicio.
 
-## Sobre <Dueño>
-- <Experiencia, para no explicarle lo básico.>
-- <Disponibilidad real: cuándo revisa y aprueba.>
+## Sobre Jhonnatan
+- Desarrollador desde 2002 (frontend/fullstack: Vue, React, Angular, Next.js, Node) y hoy Cloud Security Architect: no le expliques lo básico.
+- Entre semana revisa y aprueba desde el celular (unos 15 min al mediodía); los fines de semana hace la revisión semanal.
 
 ## Mantener el conocimiento
-- Si <Dueño> cambia algo del alcance o una decisión, actualiza PROYECTO.md y registra una ADR en `docs/decisiones/`. El repo es la memoria del proyecto, no las conversaciones.
+- Si Jhonnatan cambia algo del alcance o una decisión, actualiza PROYECTO.md y registra una ADR en `docs/decisiones/`. El repo es la memoria del proyecto, no las conversaciones.
 
 ## Comunicación
-- <Idioma>, directo y corto.
-- Al cerrar cada tarea: qué hiciste, cómo probarlo y qué necesitas de <Dueño>.
+- Español, directo y corto.
+- Al cerrar cada tarea: qué hiciste, cómo probarlo y qué necesitas de Jhonnatan.
