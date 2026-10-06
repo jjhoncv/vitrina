@@ -6,3 +6,4 @@ Las decisiones heredadas del Guardián (stack, ramas, Netlify, releases, pruebas
 
 | # | Decisión | Estado |
 |---|---|---|
+| [0001](0001-datos-de-prueba-en-escenarios.md) | Datos de prueba en los escenarios y correos simulados | Aceptada |

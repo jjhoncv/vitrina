@@ -148,3 +148,4 @@ Escenario: Comentario vacío
 | 2026-10-05 | Los comentarios se publican y se envían por correo | Pedido del dueño |
 | 2026-10-05 | Éxito: 5 usuarios comentan en 3 semanas tras la Fase 3 | Métrica medible y con plazo |
 | 2026-10-05 | Límite: 6 semanas en total | Si se pasa, se achica o se para |
+| 2026-10-05 | Los escenarios usan datos de prueba (fixtures/mocks) y los correos se simulan; `@smoke` solo en escenarios que no dependen de productos específicos ([ADR 0001](docs/decisiones/0001-datos-de-prueba-en-escenarios.md)) | El CI no depende de la hoja real ni envía correos, y el smoke contra producción no se rompe cuando el dueño edita la hoja |

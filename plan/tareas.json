@@ -1,0 +1,157 @@
+{
+  "fases": [
+    {
+      "numero": 1,
+      "nombre": "Catálogo público",
+      "entregable": "Portada y landing por producto con SEO y sitemap, leídas de la hoja"
+    },
+    {
+      "numero": 2,
+      "nombre": "Entrar con enlace por correo",
+      "entregable": "Los usuarios de la hoja entran con un enlace que vence en 15 minutos y pueden salir"
+    },
+    {
+      "numero": 3,
+      "nombre": "Comentarios",
+      "entregable": "Un usuario que entró comenta un producto; se guarda en la hoja, se envía por correo y se publica"
+    }
+  ],
+  "tareas": [
+    {
+      "id": "T1",
+      "fase": 1,
+      "titulo": "Portada con los productos de la hoja",
+      "escenarios": [
+        {
+          "archivo": "features/fase-1-catalogo-publico.feature",
+          "gherkin": "Escenario: Ver el catálogo\n  Dado que la hoja tiene los productos \"Taza de cerámica\" y \"Libreta A5\"\n  Cuando entro a la portada\n  Entonces veo los dos productos con su foto, nombre y precio"
+        }
+      ],
+      "que": "Lectura de la pestaña `productos` de Google Sheets detrás de una fuente de datos, con un fixture (Taza de cerámica, Libreta A5) para las pruebas. Portada con foto, nombre y precio de cada producto.",
+      "hecho": "El escenario «Ver el catálogo» en verde.",
+      "necesita": "Service account de Google Cloud con acceso de lectura a la hoja, y el ID de la hoja."
+    },
+    {
+      "id": "T2",
+      "fase": 1,
+      "titulo": "Landing por producto y página de no encontrado",
+      "escenarios": [
+        {
+          "archivo": "features/fase-1-catalogo-publico.feature",
+          "gherkin": "Escenario: Abrir la landing de un producto\n  Dado que la hoja tiene el producto \"Taza de cerámica\" con slug \"taza-de-ceramica\"\n  Cuando hago clic en \"Taza de cerámica\"\n  Entonces estoy en \"/productos/taza-de-ceramica\"\n  Y veo su descripción, precio y proveedor"
+        },
+        {
+          "archivo": "features/fase-1-catalogo-publico.feature",
+          "gherkin": "Escenario: Producto que no existe\n  Cuando entro a \"/productos/no-existe\"\n  Entonces veo \"Producto no encontrado\""
+        }
+      ],
+      "que": "Ruta `/productos/<slug>` con descripción, precio y proveedor; enlace desde la portada; «Producto no encontrado» si el slug no existe.",
+      "hecho": "Los escenarios «Abrir la landing de un producto» y «Producto que no existe» en verde.",
+      "necesita": ""
+    },
+    {
+      "id": "T3",
+      "fase": 1,
+      "titulo": "Título SEO y sitemap",
+      "escenarios": [
+        {
+          "archivo": "features/fase-1-catalogo-publico.feature",
+          "gherkin": "Escenario: Título para buscadores\n  Cuando entro a \"/productos/taza-de-ceramica\"\n  Entonces el título de la página es \"Taza de cerámica | Vitrina\""
+        },
+        {
+          "archivo": "features/fase-1-catalogo-publico.feature",
+          "gherkin": "Escenario: Sitemap con los productos\n  Cuando entro a \"/sitemap.xml\"\n  Entonces veo la URL \"/productos/taza-de-ceramica\""
+        }
+      ],
+      "que": "Metadatos de cada landing (título «<nombre> | Vitrina» y descripción) y `sitemap.xml` con la URL de cada producto.",
+      "hecho": "Los escenarios «Título para buscadores» y «Sitemap con los productos» en verde.",
+      "necesita": ""
+    },
+    {
+      "id": "T4",
+      "fase": 2,
+      "titulo": "Pedir el enlace de entrada",
+      "escenarios": [
+        {
+          "archivo": "features/fase-2-entrar-con-enlace.feature",
+          "gherkin": "Escenario: Pedir el enlace de entrada\n  Dado que \"ana@ejemplo.com\" está en la hoja de usuarios\n  Cuando escribo \"ana@ejemplo.com\" y pido el enlace\n  Entonces veo \"Te enviamos un enlace a ana@ejemplo.com\""
+        },
+        {
+          "archivo": "features/fase-2-entrar-con-enlace.feature",
+          "gherkin": "Escenario: Correo sin acceso\n  Dado que \"otro@ejemplo.com\" no está en la hoja de usuarios\n  Cuando escribo \"otro@ejemplo.com\" y pido el enlace\n  Entonces veo \"Este correo no tiene acceso\""
+        }
+      ],
+      "que": "Formulario de correo; si está en la pestaña `usuarios`, genera un enlace firmado que vence en 15 minutos y lo envía con Resend (simulado en pruebas); si no, «Este correo no tiene acceso».",
+      "hecho": "Los escenarios «Pedir el enlace de entrada» y «Correo sin acceso» en verde.",
+      "necesita": "Cuenta de Resend con remitente verificado, y un secreto para firmar enlaces y sesiones (GitHub Secrets y Netlify)."
+    },
+    {
+      "id": "T5",
+      "fase": 2,
+      "titulo": "Entrar con el enlace y enlace vencido",
+      "escenarios": [
+        {
+          "archivo": "features/fase-2-entrar-con-enlace.feature",
+          "gherkin": "Escenario: Entrar con el enlace\n  Dado que Ana pidió su enlace\n  Cuando abre el enlace\n  Entonces ve \"Hola, Ana\" en la cabecera"
+        },
+        {
+          "archivo": "features/fase-2-entrar-con-enlace.feature",
+          "gherkin": "Escenario: Enlace vencido\n  Dado que Ana pidió su enlace hace más de 15 minutos\n  Cuando abre el enlace\n  Entonces ve \"El enlace venció, pide uno nuevo\""
+        }
+      ],
+      "que": "Ruta que valida el enlace, crea la sesión en una cookie y muestra «Hola, <nombre>» en la cabecera; si venció, muestra «El enlace venció, pide uno nuevo».",
+      "hecho": "Los escenarios «Entrar con el enlace» y «Enlace vencido» en verde.",
+      "necesita": ""
+    },
+    {
+      "id": "T6",
+      "fase": 2,
+      "titulo": "Salir",
+      "escenarios": [
+        {
+          "archivo": "features/fase-2-entrar-con-enlace.feature",
+          "gherkin": "Escenario: Salir\n  Dado que Ana entró\n  Cuando hace clic en \"Salir\"\n  Entonces ve \"Entrar\" en la cabecera"
+        }
+      ],
+      "que": "Botón «Salir» en la cabecera que borra la sesión y vuelve a mostrar «Entrar».",
+      "hecho": "El escenario «Salir» en verde.",
+      "necesita": ""
+    },
+    {
+      "id": "T7",
+      "fase": 3,
+      "titulo": "Formulario de comentario y validación",
+      "escenarios": [
+        {
+          "archivo": "features/fase-3-comentarios.feature",
+          "gherkin": "Escenario: Sin sesión no se comenta\n  Dado que no entré\n  Cuando estoy en la landing de \"Taza de cerámica\"\n  Entonces veo \"Entra para comentar\" y no veo el formulario"
+        },
+        {
+          "archivo": "features/fase-3-comentarios.feature",
+          "gherkin": "Escenario: Comentario vacío\n  Dado que Ana entró y está en la landing de \"Taza de cerámica\"\n  Cuando envía un comentario vacío\n  Entonces ve \"Escribe un comentario\""
+        }
+      ],
+      "que": "En la landing: sin sesión, «Entra para comentar» sin formulario; con sesión, el formulario, que rechaza el comentario vacío con «Escribe un comentario».",
+      "hecho": "Los escenarios «Sin sesión no se comenta» y «Comentario vacío» en verde.",
+      "necesita": ""
+    },
+    {
+      "id": "T8",
+      "fase": 3,
+      "titulo": "Guardar, enviar por correo y publicar el comentario",
+      "escenarios": [
+        {
+          "archivo": "features/fase-3-comentarios.feature",
+          "gherkin": "Escenario: Comentar un producto\n  Dado que Ana entró y está en la landing de \"Taza de cerámica\"\n  Cuando escribe \"¿Viene en azul?\" y envía\n  Entonces ve \"Enviamos tu comentario a ti y al proveedor\"\n  Y ve su comentario publicado con su nombre y la fecha"
+        },
+        {
+          "archivo": "features/fase-3-comentarios.feature",
+          "gherkin": "Escenario: Comentario visible para todos\n  Dado que Ana comentó \"¿Viene en azul?\" en \"Taza de cerámica\"\n  Cuando un visitante sin sesión entra a esa landing\n  Entonces ve el comentario de Ana"
+        }
+      ],
+      "que": "Guarda el comentario en la pestaña `comentarios`, lo envía por correo al usuario y al proveedor (simulado en pruebas) y lo publica en la landing con nombre y fecha, visible también sin sesión.",
+      "hecho": "Los escenarios «Comentar un producto» y «Comentario visible para todos» en verde.",
+      "necesita": "Que la service account tenga permiso de escritura en la pestaña `comentarios`."
+    }
+  ]
+}
