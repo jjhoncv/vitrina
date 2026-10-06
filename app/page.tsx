@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { leerNombreDelProyecto } from "@/lib/nombre-proyecto";
 import { obtenerProductos } from "@/lib/productos";
 
@@ -13,7 +14,9 @@ export default async function Page() {
           <li key={p.slug} data-testid="producto">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={p.imagen} alt={p.nombre} width={160} height={160} />
-            <h2>{p.nombre}</h2>
+            <h2>
+              <Link href={`/productos/${p.slug}`}>{p.nombre}</Link>
+            </h2>
             <p>
               <strong>{p.precio}</strong>
             </p>

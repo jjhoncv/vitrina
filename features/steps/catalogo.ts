@@ -10,6 +10,34 @@ Given("que la hoja tiene los productos {string} y {string}", async ({}, uno: str
   expect(nombres).toEqual([uno, dos]);
 });
 
+Given("que la hoja tiene el producto {string} con slug {string}", async ({}, nombre: string, slug: string) => {
+  expect(fixture.find((p) => p.slug === slug)?.nombre).toBe(nombre);
+});
+
+When("hago clic en {string}", async ({ page }, nombre: string) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: nombre }).click();
+});
+
+When("entro a {string}", async ({ page }, ruta: string) => {
+  await page.goto(ruta);
+});
+
+Then("estoy en {string}", async ({ page }, ruta: string) => {
+  await expect(page).toHaveURL(new RegExp(`${ruta}$`));
+});
+
+Then("veo su descripción, precio y proveedor", async ({ page }) => {
+  const p = fixture[0];
+  await expect(page.getByText(p.descripcion)).toBeVisible();
+  await expect(page.getByText(p.precio)).toBeVisible();
+  await expect(page.getByText(p.proveedor)).toBeVisible();
+});
+
+Then("veo {string}", async ({ page }, texto: string) => {
+  await expect(page.getByText(texto)).toBeVisible();
+});
+
 When("entro a la portada", async ({ page }) => {
   await page.goto("/");
 });
