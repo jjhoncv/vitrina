@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { leerNombreDelProyecto } from "@/lib/nombre-proyecto";
 import { obtenerProductos } from "@/lib/productos";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const producto = (await obtenerProductos()).find((p) => p.slug === slug);
+  if (!producto) return {};
+  return { title: `${producto.nombre} | ${leerNombreDelProyecto()}`, description: producto.descripcion };
+}
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

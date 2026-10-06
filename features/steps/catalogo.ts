@@ -34,6 +34,14 @@ Then("veo su descripción, precio y proveedor", async ({ page }) => {
   await expect(page.getByText(p.proveedor)).toBeVisible();
 });
 
+Then("el título de la página es {string}", async ({ page }, titulo: string) => {
+  await expect(page).toHaveTitle(titulo);
+});
+
+Then("veo la URL {string}", async ({ page }, ruta: string) => {
+  expect(await page.content()).toContain(ruta);
+});
+
 Then("veo {string}", async ({ page }, texto: string) => {
   await expect(page.getByText(texto)).toBeVisible();
 });
