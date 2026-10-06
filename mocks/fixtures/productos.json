@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "Taza de cerámica",
+    "slug": "taza-de-ceramica",
+    "descripcion": "Taza artesanal de 350 ml.",
+    "precio": "S/ 25.00",
+    "imagen": "/producto-ejemplo.svg",
+    "proveedor": "Cerámicas del Valle",
+    "correoProveedor": "ventas@ceramicas.ejemplo.com"
+  },
+  {
+    "nombre": "Libreta A5",
+    "slug": "libreta-a5",
+    "descripcion": "Libreta de tapa dura con 120 hojas.",
+    "precio": "S/ 18.00",
+    "imagen": "/producto-ejemplo.svg",
+    "proveedor": "Papelería Andina",
+    "correoProveedor": "hola@papeleria.ejemplo.com"
+  }
+]
