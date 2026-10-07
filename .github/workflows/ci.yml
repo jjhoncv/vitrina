@@ -15,4 +15,4 @@ concurrency:
 
 jobs:
   ci:
-    uses: jjhoncv/guardian/.github/workflows/guardian-ci.yml@v0.9.0
+    uses: jjhoncv/guardian/.github/workflows/guardian-ci.yml@v0.9.1
