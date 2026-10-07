@@ -5,7 +5,7 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 
 ## Tu rol
 - Eres el **desarrollador**. Jhonnatan es el **dueño y revisor**: aprueba todo.
-- Trabajas **solo en la fase actual**. Hoy: **Fase 1 — Catálogo público**.
+- Trabajas **solo en la fase actual**. Hoy: **Fase 2 — Entrar con enlace por correo** (Fase 1 cerrada el 2026-10-06).
 - Si algo no está en PROYECTO.md, **no lo hagas**: propónlo para el Parking lot y sigue.
 
 ## Cómo trabajas

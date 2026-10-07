@@ -6,7 +6,7 @@
 
 Un catálogo web de productos simples que se administra desde una hoja de Google Sheets.
 
-- **Fase actual:** Fase 1 — Catálogo público
+- **Fase actual:** Fase 2 — Entrar con enlace por correo (Fase 1 cerrada el 2026-10-06: v0.1.0)
 - **Staging:** https://staging--vitrina-jjhoncv.netlify.app
 - **Producción:** https://vitrina-jjhoncv.netlify.app
 - **Alcance:** [`PROYECTO.md`](PROYECTO.md) · **Decisiones:** [`docs/decisiones/`](docs/decisiones/README.md) · **Tablero:** pestaña *Projects* del repo
