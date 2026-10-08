@@ -10,7 +10,10 @@ const testDir = defineBddConfig({
 });
 
 // BASE_URL apunta a un ambiente publicado (smoke test); sin ella, se levanta el build local.
-const baseURL = process.env.BASE_URL ?? "http://localhost:3000";
+// Los pasos firman enlaces con el mismo secreto que usa el servidor local.
+process.env.AUTH_SECRET ??= "secreto-solo-para-pruebas";
+
+const baseURL =process.env.BASE_URL ?? "http://localhost:3000";
 
 export default defineConfig({
   testDir,
@@ -23,5 +26,5 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: process.env.BASE_URL
     ? undefined
-    : { command: "npm start", env: { FUENTE_PRODUCTOS: "fixture", CORREO: "simulado", AUTH_SECRET: "secreto-solo-para-pruebas" }, url: baseURL, reuseExistingServer: !process.env.CI, timeout: 60_000 },
+    : { command: "npm start", env: { FUENTE_PRODUCTOS: "fixture", CORREO: "simulado", AUTH_SECRET: process.env.AUTH_SECRET }, url: baseURL, reuseExistingServer: !process.env.CI, timeout: 60_000 },
 });
