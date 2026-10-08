@@ -41,6 +41,15 @@ Then("ve {string} en la cabecera", async ({ page }, texto: string) => {
   expect(page.url()).not.toContain("token");
 });
 
+Given("que Ana entró", async ({ page }) => {
+  await page.goto(enlaceCon(crearToken("ana@ejemplo.com")));
+  await expect(page.getByRole("banner")).toContainText("Hola, Ana");
+});
+
+When("hace clic en {string}", async ({ page }, nombre: string) => {
+  await page.getByRole("button", { name: nombre }).click();
+});
+
 Then("ve {string}", async ({ page }, texto: string) => {
   await expect(page.getByText(texto)).toBeVisible();
 });
