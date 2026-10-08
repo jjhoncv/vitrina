@@ -57,3 +57,14 @@ it("si el correo falla, el comentario queda publicado y avisa", async () => {
   expect(r.mensaje).toContain("no pudimos enviar el correo");
   expect(await comentariosDe("taza-de-ceramica")).toHaveLength(1);
 });
+
+// Una sección secundaria no tumba la página: si la hoja falla al leer comentarios, la landing sigue.
+it("si la hoja falla al leer comentarios, devuelve la lista vacía", async () => {
+  const anterior = process.env.FUENTE_PRODUCTOS;
+  delete process.env.FUENTE_PRODUCTOS;
+  delete process.env.GOOGLE_SHEET_ID;
+  const error = vi.spyOn(console, "error").mockImplementation(() => {});
+  expect(await comentariosDe("taza-de-ceramica")).toEqual([]);
+  expect(error).toHaveBeenCalled();
+  process.env.FUENTE_PRODUCTOS = anterior;
+});

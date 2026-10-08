@@ -21,8 +21,14 @@ const memoria = () => ((globalThis as { __comentarios?: string[][] }).__comentar
 
 const leerFilas = async () => (enFixture() ? memoria() : await leerRango("comentarios!A2:E"));
 
+// Los comentarios son una sección secundaria: si la hoja falla al leerlos, la landing sigue sin ellos.
 export async function comentariosDe(slug: string): Promise<Comentario[]> {
-  return filasAComentarios(await leerFilas()).filter((c) => c.slug === slug);
+  try {
+    return filasAComentarios(await leerFilas()).filter((c) => c.slug === slug);
+  } catch (error) {
+    console.error("No se pudieron leer los comentarios", error);
+    return [];
+  }
 }
 
 /** Guarda el comentario, lo envía por correo al usuario y al proveedor, y queda publicado. */
