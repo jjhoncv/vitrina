@@ -25,6 +25,18 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 - Si el ticket necesita algo del dueño (cuentas, credenciales, decisiones) que no está, **no lo inventes**: coméntalo en el ticket y termina sin PR.
 - No puedes aprobar ni fusionar: eso lo hace el dueño.
 
+## Cuando el dueño te comenta (`@claude` en un PR o ticket)
+- Si lo que pide es parte del ticket (falla, ajuste o algo que el escenario exige), arréglalo **en el mismo PR**, con prueba primero.
+- Si es una idea nueva (pantalla, función o diseño que no está en `PROYECTO.md`), **no la implementes**: responde con la línea propuesta para el Parking lot (fecha y motivo) y pregúntale si la anotas.
+- Si te pregunta algo, responde corto, en su idioma, y termina con lo que necesitas de él.
+
+## Lecciones de revisión (las agrega el consultor del Guardián)
+- **URLs absolutas:** nunca las armes con los headers `Host` / `X-Forwarded-Host` del visitante. Usa un origen fijo o una lista permitida (producción, sus alias de Netlify y localhost).
+- **Tokens fuera de la URL final:** después de usar un token (enlace de entrada, invitación…), redirige a un destino con su propia query. En Netlify, una redirección sin query conserva la original y el token queda en la barra y en el historial.
+- **No reimplementes protocolos ni criptografía** (SMTP, OAuth, JWT…). Si hace falta una dependencia y no puedes instalarla, para y pídesela al dueño en el PR, con el paquete y el motivo.
+- **Secretos de ejecución** (Gmail, Google, firmas): van en las variables de Netlify, marcadas como secretas. GitHub Secrets solo si un workflow los usa. Dile al dueño exactamente cuáles y dónde.
+- **Lo que no se prueba en local** (comportamiento de Netlify, correo real): dilo en el PR y dale al dueño el paso exacto para comprobarlo en el preview.
+
 ## Stack (heredado de la plantilla)
 - Next.js 16 + TypeScript, Node 24 (`.nvmrc`), npm
 - Vitest (TDD) para unidades; BDD + E2E con playwright-bdd: `features/*.feature` (Gherkin en español) y pasos en `features/steps/`
