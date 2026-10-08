@@ -22,7 +22,7 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 ## Cuando trabajas en la nube (GitHub Actions)
 - Te activa un `@claude` del dueño en un ticket, o el Guardián al fusionarse un PR (siguiente ticket de la fase).
 - Rama `feat/<n>-<slug>` desde `main`; pruebas primero; corre `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` y `npm run e2e` antes de abrir el PR.
-- Abre el PR con `gh pr create`: título `feat(#<n>): …` (Conventional Commits) y en el cuerpo `Closes #<n>`, el escenario que pone en verde y cómo probarlo.
+- Abre el PR con `gh pr create --body-file`: título `feat(#<n>): …` (Conventional Commits) y el cuerpo **en dos niveles**, siguiendo `.github/pull_request_template.md`: primero **En simple** (qué cambia para el usuario, diagrama si hay un flujo, cómo probarlo en el preview, qué necesitas del dueño, escenarios en verde) y después el **Detalle técnico** plegado. Si después cambias algo, actualiza la descripción (`gh pr edit --body-file`). Ejemplo: #36.
 - Si el ticket necesita algo del dueño (cuentas, credenciales, decisiones) que no está, **no lo inventes**: coméntalo en el ticket y termina sin PR.
 - No puedes aprobar ni fusionar: eso lo hace el dueño.
 
