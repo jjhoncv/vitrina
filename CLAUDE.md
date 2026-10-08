@@ -37,8 +37,6 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 - **No reimplementes protocolos ni criptografía** (SMTP, OAuth, JWT…). Si hace falta una dependencia y no puedes instalarla, para y pídesela al dueño en el PR, con el paquete y el motivo.
 - **Secretos de ejecución** (Gmail, Google, firmas): van en las variables de Netlify, marcadas como secretas. GitHub Secrets solo si un workflow los usa. Dile al dueño exactamente cuáles y dónde.
 - **Lo que no se prueba en local** (comportamiento de Netlify, correo real): dilo en el PR y dale al dueño el paso exacto para comprobarlo en el preview.
-- **Autorización en el servidor:** esconder un botón o formulario no protege nada. Toda server action o ruta que actúe a nombre de un usuario verifica la sesión **en el servidor** y tiene una prueba de «POST sin sesión → rechazado» (#33).
-- **Texto libre con límite:** todo campo que escribe el usuario y se guarda o se envía por correo tiene un largo máximo validado en el servidor.
 
 ## Stack (heredado de la plantilla)
 - Next.js 16 + TypeScript, Node 24 (`.nvmrc`), npm
