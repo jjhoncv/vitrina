@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { leerNombreDelProyecto } from "@/lib/nombre-proyecto";
+import { salirAccion } from "./salir/actions";
 import { COOKIE_SESION, verificarSesion } from "@/lib/sesion";
 
 export const metadata: Metadata = {
@@ -12,7 +13,15 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="es">
       <body style={{ fontFamily: "system-ui, sans-serif", display: "grid", placeItems: "center", minHeight: "100vh", margin: 0 }}>
-        {sesion && <header>Hola, {sesion.nombre}</header>}
+        <header>
+          {sesion ? (
+            <form action={salirAccion}>
+              Hola, {sesion.nombre} <button type="submit">Salir</button>
+            </form>
+          ) : (
+            <a href="/entrar">Entrar</a>
+          )}
+        </header>
         {children}
       </body>
     </html>
