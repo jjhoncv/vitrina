@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/jjhoncv/vitrina/compare/v0.3.0...v0.4.0) (2026-10-08)
+
+
+### Funcionalidades
+
+* **#8:** formulario de comentario y validación ([#33](https://github.com/jjhoncv/vitrina/issues/33)) ([acebf71](https://github.com/jjhoncv/vitrina/commit/acebf7157cd987d970e8200f5fe9c9c7c8143f07))
+* **#9:** guardar, enviar por correo y publicar el comentario ([#36](https://github.com/jjhoncv/vitrina/issues/36)) ([eca3bbd](https://github.com/jjhoncv/vitrina/commit/eca3bbdf53dd096f22628b35777a1c3c9e54e1ed))
+
 ## [0.3.0](https://github.com/jjhoncv/vitrina/compare/v0.2.0...v0.3.0) (2026-10-08)
 
 
