@@ -28,13 +28,16 @@ export function filasAProductos(filas: string[][]): Producto[] {
 
 const base64url = (s: string | Buffer) => Buffer.from(s).toString("base64url");
 
-async function tokenDeGoogle(correo: string, clavePrivada: string): Promise<string> {
+const SCOPE_LECTURA = "https://www.googleapis.com/auth/spreadsheets.readonly";
+const SCOPE_ESCRITURA = "https://www.googleapis.com/auth/spreadsheets";
+
+async function tokenDeGoogle(correo: string, clavePrivada: string, scope: string): Promise<string> {
   const ahora = Math.floor(Date.now() / 1000);
   const cabecera = base64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
   const cuerpo = base64url(
     JSON.stringify({
       iss: correo,
-      scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
+      scope,
       aud: "https://oauth2.googleapis.com/token",
       iat: ahora,
       exp: ahora + 3600,
@@ -53,15 +56,35 @@ async function tokenDeGoogle(correo: string, clavePrivada: string): Promise<stri
   return (await res.json()).access_token;
 }
 
-/** Lee un rango de la hoja (p. ej. `productos!A2:G`) con la service account. */
-export async function leerRango(rango: string): Promise<string[][]> {
+function credenciales() {
   const { GOOGLE_SHEET_ID, GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY } = process.env;
   if (!GOOGLE_SHEET_ID || !GOOGLE_SERVICE_ACCOUNT_EMAIL || !GOOGLE_PRIVATE_KEY) {
     throw new Error("Faltan GOOGLE_SHEET_ID, GOOGLE_SERVICE_ACCOUNT_EMAIL o GOOGLE_PRIVATE_KEY");
   }
-  const token = await tokenDeGoogle(GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"));
+  return { hoja: GOOGLE_SHEET_ID, correo: GOOGLE_SERVICE_ACCOUNT_EMAIL, clave: GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n") };
+}
+
+/** Agrega una fila al final de una pestaña. RAW: la hoja no interpreta fórmulas del visitante. */
+export async function agregarFila(pestana: string, fila: string[]): Promise<void> {
+  const { hoja, correo, clave } = credenciales();
+  const token = await tokenDeGoogle(correo, clave, SCOPE_ESCRITURA);
   const res = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/${rango}`,
+    `https://sheets.googleapis.com/v4/spreadsheets/${hoja}/values/${pestana}!A:E:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,
+    {
+      method: "POST",
+      headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+      body: JSON.stringify({ values: [fila] }),
+    },
+  );
+  if (!res.ok) throw new Error(`No se pudo escribir en la hoja (${res.status})`);
+}
+
+/** Lee un rango de la hoja (p. ej. `productos!A2:G`) con la service account. */
+export async function leerRango(rango: string): Promise<string[][]> {
+  const { hoja, correo, clave } = credenciales();
+  const token = await tokenDeGoogle(correo, clave, SCOPE_LECTURA);
+  const res = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${hoja}/values/${rango}`,
     { headers: { authorization: `Bearer ${token}` } },
   );
   if (!res.ok) throw new Error(`No se pudo leer la hoja (${res.status})`);
