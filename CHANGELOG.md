@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/jjhoncv/vitrina/compare/v0.2.0...v0.3.0) (2026-10-08)
+
+
+### Funcionalidades
+
+* **#7:** salir ([#29](https://github.com/jjhoncv/vitrina/issues/29)) ([d2c1688](https://github.com/jjhoncv/vitrina/commit/d2c16883decad36602a0248a56ccd3f934e4c750))
+
 ## [0.2.0](https://github.com/jjhoncv/vitrina/compare/v0.1.0...v0.2.0) (2026-10-08)
 
 
