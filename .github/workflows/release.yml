@@ -11,5 +11,5 @@ permissions:
 
 jobs:
   release:
-    uses: jjhoncv/guardian/.github/workflows/guardian-release.yml@v0.9.2
+    uses: jjhoncv/guardian/.github/workflows/guardian-release.yml@v0.10.0
     secrets: inherit
