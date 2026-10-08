@@ -81,9 +81,9 @@
           "gherkin": "Escenario: Correo sin acceso\n  Dado que \"otro@ejemplo.com\" no está en la hoja de usuarios\n  Cuando escribo \"otro@ejemplo.com\" y pido el enlace\n  Entonces veo \"Este correo no tiene acceso\""
         }
       ],
-      "que": "Formulario de correo; si está en la pestaña `usuarios`, genera un enlace firmado que vence en 15 minutos y lo envía con Resend (simulado en pruebas); si no, «Este correo no tiene acceso».",
+      "que": "Formulario de correo; si está en la pestaña `usuarios`, genera un enlace firmado que vence en 15 minutos y lo envía con Gmail SMTP (simulado en pruebas); si no, «Este correo no tiene acceso».",
       "hecho": "Los escenarios «Pedir el enlace de entrada» y «Correo sin acceso» en verde.",
-      "necesita": "Cuenta de Resend con remitente verificado, y un secreto para firmar enlaces y sesiones (GitHub Secrets y Netlify)."
+      "necesita": "Contraseña de aplicación de Gmail (GMAIL_USER, GMAIL_APP_PASSWORD) y un secreto AUTH_SECRET para firmar enlaces y sesiones (GitHub Secrets y Netlify)."
     },
     {
       "id": "T5",
