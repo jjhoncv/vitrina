@@ -15,7 +15,11 @@ const error = (r: Response) => new URL(r.headers.get("location")!).searchParams.
 it("con un enlace válido crea la sesión y vuelve a la portada", async () => {
   const r = await pedir(crearToken("ana@ejemplo.com"));
   expect(r.status).toBe(307);
-  expect(new URL(r.headers.get("location")!).pathname).toBe("/");
+  const destino = new URL(r.headers.get("location")!);
+  expect(destino.pathname).toBe("/");
+  // Destino con query propia: Netlify solo conserva la query original si el destino no trae una (ADR 0004).
+  expect(destino.search).toBe("?bienvenida=1");
+  expect(destino.href).not.toContain("token");
   const cookie = r.headers.getSetCookie()[0];
   expect(cookie).toMatch(/HttpOnly/i);
   expect(cookie).toMatch(/SameSite=lax/i);

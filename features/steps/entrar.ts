@@ -38,6 +38,7 @@ When("abre el enlace", async ({ page }) => {
 
 Then("ve {string} en la cabecera", async ({ page }, texto: string) => {
   await expect(page.getByRole("banner")).toContainText(texto);
+  expect(page.url()).not.toContain("token");
 });
 
 Then("ve {string}", async ({ page }, texto: string) => {

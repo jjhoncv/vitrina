@@ -12,7 +12,8 @@ export async function GET(request: Request) {
   const correo = verificarToken(url.searchParams.get("token") ?? "");
   const usuario = correo ? await buscarUsuario(correo) : undefined;
   if (!usuario) return NextResponse.redirect(`${origen}/entrar?error=vencido`);
-  const respuesta = NextResponse.redirect(`${origen}/`);
+  // El destino lleva su propia query: si no, Netlify le pega la original y el token queda en la barra (ADR 0004).
+  const respuesta = NextResponse.redirect(`${origen}/?bienvenida=1`);
   respuesta.cookies.set(COOKIE_SESION, crearSesion(usuario), {
     httpOnly: true,
     sameSite: "lax",
