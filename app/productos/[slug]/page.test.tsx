@@ -1,21 +1,45 @@
 // @vitest-environment jsdom
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeAll, beforeEach, expect, it, vi } from "vitest";
+import { comentar } from "@/lib/comentarios";
 import { crearSesion } from "@/lib/sesion";
 import Page, { generateMetadata } from "./page";
 import NoEncontrado from "./not-found";
 
 let cookie: string | undefined;
-vi.mock("next/headers", () => ({ cookies: async () => ({ get: () => (cookie ? { value: cookie } : undefined) }) }));
+vi.mock("next/headers", () => ({
+  cookies: async () => ({ get: () => (cookie ? { value: cookie } : undefined) }),
+}));
+// El formulario es un componente cliente con una acción de servidor: aquí solo importa si aparece.
+vi.mock("./formulario-comentario", () => ({ FormularioComentario: () => <form aria-label="Comentar" /> }));
 
-beforeEach(() => {
-  cookie = undefined;
-});
 afterEach(cleanup);
 
 beforeAll(() => {
   process.env.FUENTE_PRODUCTOS = "fixture";
   process.env.AUTH_SECRET = "secreto-de-prueba";
+});
+
+beforeEach(() => {
+  cookie = undefined;
+  delete (globalThis as { __comentarios?: unknown }).__comentarios;
+});
+
+// Fase 3 — Comentario visible para todos: sin sesión se ven los comentarios, con nombre y fecha.
+it("muestra los comentarios publicados con nombre y fecha a un visitante sin sesión", async () => {
+  await comentar("taza-de-ceramica", "¿Viene en azul?", { nombre: "Ana", correo: "ana@ejemplo.com" }, async () => {});
+  render(await Page({ params: Promise.resolve({ slug: "taza-de-ceramica" }) }));
+  expect(screen.getByText("¿Viene en azul?")).toBeTruthy();
+  expect(screen.getByText("Ana")).toBeTruthy();
+  expect(document.querySelector("time")?.textContent).toMatch(/\d{4}/);
+  expect(screen.queryByLabelText("Comentar")).toBeNull();
+});
+
+// Fase 3 — Comentar un producto: quien entró ve el formulario.
+it("con sesión muestra el formulario para comentar", async () => {
+  cookie = crearSesion({ nombre: "Ana", correo: "ana@ejemplo.com" });
+  render(await Page({ params: Promise.resolve({ slug: "taza-de-ceramica" }) }));
+  expect(screen.getByLabelText("Comentar")).toBeTruthy();
 });
 
 // Fase 1 — Abrir la landing de un producto: descripción, precio y proveedor.
@@ -52,12 +76,6 @@ it("sin producto, no genera metadatos propios", async () => {
 it("sin sesión muestra «Entra para comentar» y no el formulario", async () => {
   render(await Page({ params: Promise.resolve({ slug: "taza-de-ceramica" }) }));
   expect(screen.getByText("Entra para comentar")).toBeTruthy();
-  expect(screen.queryByLabelText("Comentario")).toBeNull();
+  expect(screen.queryByLabelText("Comentar")).toBeNull();
 });
 
-it("con sesión muestra el formulario de comentario", async () => {
-  cookie = crearSesion({ nombre: "Ana", correo: "ana@ejemplo.com" });
-  render(await Page({ params: Promise.resolve({ slug: "taza-de-ceramica" }) }));
-  expect(screen.getByLabelText("Comentario")).toBeTruthy();
-  expect(screen.queryByText("Entra para comentar")).toBeNull();
-});

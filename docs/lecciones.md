@@ -22,6 +22,7 @@
 | **Límite de pedidos** (login, formularios públicos) | No hace falta; anótalo en el Parking lot | Obligatorio |
 | **Dependencias nuevas** | Solo si evitan reimplementar algo delicado | Elegidas con criterio: mantenimiento, licencia, tamaño |
 | **Enlaces y sesiones** | Vencimiento corto basta | Un solo uso y sesiones revocables |
+| **Una parte secundaria falla** (comentarios, recomendaciones…; vitrina#36) | La página sigue sin esa parte: `try/catch` y `console.error` | Además: aviso visible, reintento y alerta de monitoreo |
 
 ## Según el stack (solo si el proyecto usa esa pieza)
 

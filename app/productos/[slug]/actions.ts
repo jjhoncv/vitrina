@@ -1,17 +1,21 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { validarComentario } from "@/lib/comentario";
+import { revalidatePath } from "next/cache";
+import { comentar, type Resultado } from "@/lib/comentarios";
 import { COOKIE_SESION, verificarSesion } from "@/lib/sesion";
 
-export type ResultadoComentario = { ok: boolean; mensaje: string };
-
-export async function comentarAccion(_previo: ResultadoComentario | null, datos: FormData): Promise<ResultadoComentario> {
-  // La pantalla esconde el formulario, pero la acción acepta POST de cualquiera: la sesión se verifica aquí.
+export async function comentarAccion(_previo: Resultado | null, datos: FormData): Promise<Resultado> {
+  // La identidad sale de la cookie firmada, nunca del formulario.
   const sesion = verificarSesion((await cookies()).get(COOKIE_SESION)?.value);
   if (!sesion) return { ok: false, mensaje: "Entra para comentar" };
-  const validacion = validarComentario(String(datos.get("comentario") ?? ""));
-  if (!validacion.ok) return validacion;
-  // Guardar, enviar por correo y publicar llega en la tarea T8.
-  return { ok: false, mensaje: "Todavía no podemos guardar comentarios" };
+  const slug = String(datos.get("slug") ?? "");
+  try {
+    const resultado = await comentar(slug, String(datos.get("texto") ?? ""), sesion);
+    if (resultado.ok) revalidatePath(`/productos/${slug}`);
+    return resultado;
+  } catch (error) {
+    console.error(error);
+    return { ok: false, mensaje: "No pudimos guardar tu comentario, intenta de nuevo" };
+  }
 }
