@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/jjhoncv/vitrina/compare/v0.1.0...v0.2.0) (2026-10-08)
+
+
+### Funcionalidades
+
+* **#5:** pedir el enlace de entrada por correo (Gmail SMTP) ([#20](https://github.com/jjhoncv/vitrina/issues/20)) ([8fa1935](https://github.com/jjhoncv/vitrina/commit/8fa19358489333d007b05dceca2afee438747d6c))
+* **#6:** entrar con el enlace y enlace vencido ([#24](https://github.com/jjhoncv/vitrina/issues/24)) ([102f63b](https://github.com/jjhoncv/vitrina/commit/102f63bd5130fc529f529dbe839812682d3d2b2c))
+
 ## 0.1.0 (2026-10-07)
 
 
