@@ -138,6 +138,7 @@ Escenario: Comentario vacío
 - Buscador y categorías (2026-10-05): la portada empieza como un listado simple.
 - Entrar con Google en vez del enlace por correo (2026-10-08): mejor experiencia, pero suma OAuth a Gmail SMTP (los comentarios igual envían correos), no funciona en los previews y deja fuera a quien no tiene cuenta de Google.
 - Header y footer con la marca de Vitrina (2026-10-08): que el catálogo se vea más presentable; definirlo junto con la cabecera de sesión de la Fase 2.
+- Límite de pedidos de enlace por correo y por IP (2026-10-08): hoy alguien podría llenar de correos a un usuario o agotar el cupo de Gmail (~500 por día); con pocos usuarios en la prueba, el riesgo es bajo.
 
 ## 10. Decisiones tomadas
 
