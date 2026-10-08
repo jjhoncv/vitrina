@@ -13,4 +13,4 @@ permissions:
 
 jobs:
   tickets:
-    uses: jjhoncv/guardian/.github/workflows/guardian-tickets.yml@v0.10.0
+    uses: jjhoncv/guardian/.github/workflows/guardian-tickets.yml@v0.14.0

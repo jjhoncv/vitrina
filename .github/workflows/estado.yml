@@ -1,0 +1,23 @@
+# Llama al workflow del Guardián (v0.14.0): fase, avance y salud del proyecto → rama `estado` y badges del README.
+name: Estado
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  estado:
+    permissions:
+      contents: write
+      actions: read
+      issues: read
+      pull-requests: read
+    uses: jjhoncv/guardian/.github/workflows/guardian-estado.yml@v0.14.0
