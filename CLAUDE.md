@@ -31,6 +31,7 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 - Si te pregunta algo, responde corto, en su idioma, y termina con lo que necesitas de él.
 
 ## Lecciones de revisión (las agrega el consultor del Guardián)
+- Los commits marcados **`(consultor)`** en tus PRs son correcciones del consultor del Guardián: cada uno trae su lección en esta sección. Léelas antes de empezar un ticket y no repitas esos errores.
 - **URLs absolutas:** nunca las armes con los headers `Host` / `X-Forwarded-Host` del visitante. Usa un origen fijo o una lista permitida (producción, sus alias de Netlify y localhost).
 - **Tokens fuera de la URL final:** después de usar un token (enlace de entrada, invitación…), redirige a un destino con su propia query. En Netlify, una redirección sin query conserva la original y el token queda en la barra y en el historial.
 - **No reimplementes protocolos ni criptografía** (SMTP, OAuth, JWT…). Si hace falta una dependencia y no puedes instalarla, para y pídesela al dueño en el PR, con el paquete y el motivo.
