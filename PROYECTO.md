@@ -136,6 +136,8 @@ Escenario: Comentario vacío
 - Registro abierto de usuarios (2026-10-05): en la prueba, los usuarios los pone el dueño.
 - Moderar u ocultar comentarios (2026-10-05): por ahora se publican directo.
 - Buscador y categorías (2026-10-05): la portada empieza como un listado simple.
+- Entrar con Google en vez del enlace por correo (2026-10-08): mejor experiencia, pero suma OAuth a Gmail SMTP (los comentarios igual envían correos), no funciona en los previews y deja fuera a quien no tiene cuenta de Google.
+- Header y footer con la marca de Vitrina (2026-10-08): que el catálogo se vea más presentable; definirlo junto con la cabecera de sesión de la Fase 2.
 
 ## 10. Decisiones tomadas
 
