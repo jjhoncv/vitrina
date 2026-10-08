@@ -7,6 +7,7 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 - Eres el **desarrollador**. Jhonnatan es el **dueño y revisor**: aprueba todo.
 - Trabajas **solo en la fase actual**. Hoy: **Fase 3 — Comentarios** (Fase 1 cerrada el 2026-10-06; Fase 2 el 2026-10-08).
 - Si algo no está en PROYECTO.md, **no lo hagas**: propónlo para el Parking lot y sigue.
+- El **tipo** del proyecto (prueba/MVP o producto) está en PROYECTO.md → Límites: define cuánto construir (ver `docs/lecciones.md`). Vitrina es una **prueba**.
 
 ## Cómo trabajas
 1. **`/guardian`** muestra en qué paso está el proyecto y qué falta. El alcance se convierte en escenarios y tareas con **`/guardian-planificar`** (plan por PR; los tickets se crean al fusionarlo). Antes de empezar una fase, muestra el plan de tareas y **espera aprobación**.
@@ -30,13 +31,17 @@ Se creó con **[Guardián](https://github.com/jjhoncv/guardian)** (`guardian-ske
 - Si es una idea nueva (pantalla, función o diseño que no está en `PROYECTO.md`), **no la implementes**: responde con la línea propuesta para el Parking lot (fecha y motivo) y pregúntale si la anotas.
 - Si te pregunta algo, responde corto, en su idioma, y termina con lo que necesitas de él.
 
-## Lecciones de revisión (las agrega el consultor del Guardián)
-- Los commits marcados **`(consultor)`** en tus PRs son correcciones del consultor del Guardián: cada uno trae su lección en esta sección. Léelas antes de empezar un ticket y no repitas esos errores.
-- **URLs absolutas:** nunca las armes con los headers `Host` / `X-Forwarded-Host` del visitante. Usa un origen fijo o una lista permitida (producción, sus alias de Netlify y localhost).
-- **Tokens fuera de la URL final:** después de usar un token (enlace de entrada, invitación…), redirige a un destino con su propia query. En Netlify, una redirección sin query conserva la original y el token queda en la barra y en el historial.
-- **No reimplementes protocolos ni criptografía** (SMTP, OAuth, JWT…). Si hace falta una dependencia y no puedes instalarla, para y pídesela al dueño en el PR, con el paquete y el motivo.
-- **Secretos de ejecución** (Gmail, Google, firmas): van en las variables de Netlify, marcadas como secretas. GitHub Secrets solo si un workflow los usa. Dile al dueño exactamente cuáles y dónde.
-- **Lo que no se prueba en local** (comportamiento de Netlify, correo real): dilo en el PR y dale al dueño el paso exacto para comprobarlo en el preview.
+## Prioridad (cuando dos cosas chocan)
+**Objetivo del proyecto > alcance de la fase y del ticket > tipo de proyecto > lecciones.** Ninguna lección justifica salirse del ticket.
+
+## Inicio y fin de cada ticket
+- **Inicio:** el ticket es de la fase actual, tiene escenario y no falta nada del dueño. Si algo de eso falla, coméntalo en el ticket y termina sin PR.
+- **Antes de escribir código:** lee `docs/lecciones.md` y aplica las que correspondan al tipo del proyecto y al stack.
+- **Fin:** el escenario está en verde, el PR tiene menos de 300 líneas y lo que quedó fuera está anotado en el PR. **Termina ahí.**
+- **Sin círculos:** si el mismo problema falla dos veces seguidas, para y explícalo en el PR (qué probaste y qué necesitas).
+
+## Lecciones de revisión
+Están en **`docs/lecciones.md`**: criterio con alcance (siempre / según tipo / según stack) y su porqué. Los commits `(consultor)` en tus PRs traen cada lección nueva; no repitas esos errores.
 
 ## Stack (heredado de la plantilla)
 - Next.js 16 + TypeScript, Node 24 (`.nvmrc`), npm
