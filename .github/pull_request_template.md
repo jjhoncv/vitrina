@@ -7,9 +7,9 @@ Closes #
 
 **Qué cambia para el usuario:** <!-- 1 a 3 frases: quién puede hacer qué, ahora. -->
 
-<!-- Diagrama solo si hay un flujo (pasos o decisiones). Usa siempre este formato: la primera línea evita que GitHub corte el texto; de arriba hacia abajo se lee bien en el celular. -->
+<!-- Diagrama solo si hay un flujo (pasos o decisiones). Usa siempre este formato: la primera línea (htmlLabels y wrappingWidth) evita que GitHub corte el texto; de arriba hacia abajo se lee bien en el celular. -->
 ```mermaid
-%%{init: {"flowchart": {"htmlLabels": false}}}%%
+%%{init: {"flowchart": {"htmlLabels": false, "wrappingWidth": 400}}}%%
 flowchart TD
     A["👤 Quién hace algo"] --> B{"¿Condición?"}
     B -- Sí --> C["✅ Qué pasa"]
