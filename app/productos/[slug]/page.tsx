@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <p style={{ whiteSpace: "pre-wrap" }}>{c.texto}</p>
           </article>
         ))}
-        {sesion && <FormularioComentario slug={producto.slug} />}
+        {sesion ? <FormularioComentario slug={producto.slug} /> : <p>Entra para comentar</p>}
       </section>
     </main>
   );

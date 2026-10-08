@@ -51,3 +51,27 @@ Then("ve el comentario de Ana", async ({ page }) => {
   const comentario = page.getByRole("article").filter({ hasText: "¿Viene en azul?" }).first();
   await expect(comentario).toContainText("Ana");
 });
+
+// Fase 3 — Sin sesión no se comenta / Comentario vacío (#8).
+const rutaDe = (nombre: string) => {
+  const slug = productos.find((p) => p.nombre === nombre)?.slug;
+  expect(slug, `producto «${nombre}» en el fixture`).toBeTruthy();
+  return `/productos/${slug}`;
+};
+
+Given("que no entré", async ({ context }) => {
+  await context.clearCookies();
+});
+
+When("estoy en la landing de {string}", async ({ page }, nombre: string) => {
+  await page.goto(rutaDe(nombre));
+});
+
+When("envía un comentario vacío", async ({ page }) => {
+  await page.getByRole("button", { name: "Enviar" }).click();
+});
+
+Then("veo {string} y no veo el formulario", async ({ page }, texto: string) => {
+  await expect(page.getByText(texto)).toBeVisible();
+  await expect(page.getByRole("textbox", { name: "Comentario" })).toHaveCount(0);
+});

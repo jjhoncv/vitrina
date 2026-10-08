@@ -71,3 +71,11 @@ it("genera título y descripción para SEO", async () => {
 it("sin producto, no genera metadatos propios", async () => {
   expect(await generateMetadata({ params: Promise.resolve({ slug: "no-existe" }) })).toEqual({});
 });
+
+// Fase 3 — Sin sesión no se comenta.
+it("sin sesión muestra «Entra para comentar» y no el formulario", async () => {
+  render(await Page({ params: Promise.resolve({ slug: "taza-de-ceramica" }) }));
+  expect(screen.getByText("Entra para comentar")).toBeTruthy();
+  expect(screen.queryByLabelText("Comentar")).toBeNull();
+});
+
