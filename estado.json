@@ -1,0 +1,14 @@
+{
+  "proyecto": "vitrina",
+  "fase": null,
+  "avance": null,
+  "salud": {
+    "color": "verde",
+    "emoji": "🟢",
+    "motivos": [],
+    "alertas": [],
+    "diasAtraso": 0,
+    "pausa": false
+  },
+  "actualizado": "2026-10-08T22:40:22.697Z"
+}
