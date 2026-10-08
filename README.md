@@ -3,6 +3,9 @@
 [![CI](https://github.com/jjhoncv/vitrina/actions/workflows/ci.yml/badge.svg)](https://github.com/jjhoncv/vitrina/actions/workflows/ci.yml)
 [![Deploy](https://github.com/jjhoncv/vitrina/actions/workflows/deploy.yml/badge.svg)](https://github.com/jjhoncv/vitrina/actions/workflows/deploy.yml)
 [![Release](https://github.com/jjhoncv/vitrina/actions/workflows/release.yml/badge.svg)](https://github.com/jjhoncv/vitrina/actions/workflows/release.yml)
+[![Fase](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/jjhoncv/vitrina/estado/fase.json)](https://github.com/jjhoncv/vitrina/milestones)
+[![Avance](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/jjhoncv/vitrina/estado/avance.json)](https://github.com/jjhoncv/vitrina/actions/workflows/ci.yml)
+[![Salud](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/jjhoncv/vitrina/estado/salud.json)](https://github.com/jjhoncv/vitrina/actions/workflows/estado.yml)
 
 Un catálogo web de productos simples que se administra desde una hoja de Google Sheets.
 

@@ -16,5 +16,5 @@ concurrency:
 
 jobs:
   deploy:
-    uses: jjhoncv/guardian/.github/workflows/guardian-deploy.yml@v0.10.0
+    uses: jjhoncv/guardian/.github/workflows/guardian-deploy.yml@v0.14.0
     secrets: inherit
