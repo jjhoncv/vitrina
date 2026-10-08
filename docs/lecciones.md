@@ -27,4 +27,5 @@
 
 - **Netlify — redirecciones:** una redirección sin query conserva la query original; usa un destino con query propia. _Ej.: vitrina#24._
 - **Netlify — secretos de ejecución:** van en las variables del sitio, marcadas como secretas. GitHub Secrets solo si un workflow los usa. Dile al dueño exactamente cuáles y dónde.
+- **GitHub — diagramas Mermaid:** empieza con `%%{init: {"flowchart": {"htmlLabels": false}}}%%` (si no, GitHub corta el texto de las cajas) y usa `flowchart TD`, de arriba hacia abajo, para leerlo en el celular. _Ej.: vitrina#36._
 - **Gmail SMTP:** unos 500 correos por día y riesgo de spam; sirve para una prueba. Para un producto, un proveedor transaccional.
