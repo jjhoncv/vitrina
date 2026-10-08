@@ -29,7 +29,7 @@ En **3 semanas** desde que se publica la Fase 3, al menos **5 usuarios distintos
 - **Tipo:** prueba. Nada de base de datos, panel ni registro abierto hasta validarla.
 - **Cuentas que se van a pedir:**
   - Fase 1: service account de Google Cloud con acceso a la hoja.
-  - Fases 2 y 3: cuenta de Resend con un remitente verificado.
+  - Fases 2 y 3: cuenta de Gmail (jjhoncv@gmail.com) con contraseña de aplicación para enviar correos por SMTP, y un secreto `AUTH_SECRET` para firmar enlaces y sesiones.
 
 ## 7. Fases
 
@@ -151,3 +151,4 @@ Escenario: Comentario vacío
 | 2026-10-05 | Éxito: 5 usuarios comentan en 3 semanas tras la Fase 3 | Métrica medible y con plazo |
 | 2026-10-05 | Límite: 6 semanas en total | Si se pasa, se achica o se para |
 | 2026-10-05 | Los escenarios usan datos de prueba (fixtures/mocks) y los correos se simulan; `@smoke` solo en escenarios que no dependen de productos específicos ([ADR 0001](docs/decisiones/0001-datos-de-prueba-en-escenarios.md)) | El CI no depende de la hoja real ni envía correos, y el smoke contra producción no se rompe cuando el dueño edita la hoja |
+| 2026-10-08 | Los correos salen por Gmail SMTP (jjhoncv@gmail.com) en vez de Resend ([ADR 0003](docs/decisiones/0003-correo-con-gmail-smtp.md)) | No requiere dominio propio ni cuenta nueva |

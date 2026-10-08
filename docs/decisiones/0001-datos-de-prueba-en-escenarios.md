@@ -13,4 +13,4 @@ Los escenarios corren con datos de prueba: productos, usuarios y comentarios sal
 
 ## Por qué
 
-Así el CI es determinista y no necesita credenciales de Google ni de Resend, y el smoke de producción no se rompe cuando cambia la hoja. Se descartó correr los E2E contra una hoja de pruebas real: sería más lento, necesitaría credenciales en cada PR y podría fallar por cambios externos.
+Así el CI es determinista y no necesita credenciales de Google ni de Gmail, y el smoke de producción no se rompe cuando cambia la hoja. Se descartó correr los E2E contra una hoja de pruebas real: sería más lento, necesitaría credenciales en cada PR y podría fallar por cambios externos.

@@ -53,19 +53,22 @@ async function tokenDeGoogle(correo: string, clavePrivada: string): Promise<stri
   return (await res.json()).access_token;
 }
 
-async function leerDeLaHoja(): Promise<Producto[]> {
+/** Lee un rango de la hoja (p. ej. `productos!A2:G`) con la service account. */
+export async function leerRango(rango: string): Promise<string[][]> {
   const { GOOGLE_SHEET_ID, GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY } = process.env;
   if (!GOOGLE_SHEET_ID || !GOOGLE_SERVICE_ACCOUNT_EMAIL || !GOOGLE_PRIVATE_KEY) {
     throw new Error("Faltan GOOGLE_SHEET_ID, GOOGLE_SERVICE_ACCOUNT_EMAIL o GOOGLE_PRIVATE_KEY");
   }
   const token = await tokenDeGoogle(GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"));
   const res = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/productos!A2:G`,
+    `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/${rango}`,
     { headers: { authorization: `Bearer ${token}` } },
   );
   if (!res.ok) throw new Error(`No se pudo leer la hoja (${res.status})`);
-  return filasAProductos((await res.json()).values ?? []);
+  return (await res.json()).values ?? [];
 }
+
+const leerDeLaHoja = async () => filasAProductos(await leerRango("productos!A2:G"));
 
 // Fuente de datos: la hoja real, o el fixture con FUENTE_PRODUCTOS=fixture (pruebas, ADR 0001).
 export async function obtenerProductos(): Promise<Producto[]> {

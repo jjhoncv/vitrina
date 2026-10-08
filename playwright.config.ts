@@ -23,5 +23,5 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: process.env.BASE_URL
     ? undefined
-    : { command: "npm start", env: { FUENTE_PRODUCTOS: "fixture" }, url: baseURL, reuseExistingServer: !process.env.CI, timeout: 60_000 },
+    : { command: "npm start", env: { FUENTE_PRODUCTOS: "fixture", CORREO: "simulado", AUTH_SECRET: "secreto-solo-para-pruebas" }, url: baseURL, reuseExistingServer: !process.env.CI, timeout: 60_000 },
 });
