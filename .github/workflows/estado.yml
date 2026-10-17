@@ -20,4 +20,4 @@ jobs:
       actions: read
       issues: read
       pull-requests: read
-    uses: jjhoncv/guardian/.github/workflows/guardian-estado.yml@v0.14.0
+    uses: jjhoncv/guardian/.github/workflows/guardian-estado.yml@v0.18.2
